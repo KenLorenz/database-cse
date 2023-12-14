@@ -1,0 +1,69 @@
+use mydb;
+
+
+manufacturer table
+
+INSERT INTO `mydb`.`manufacturer` (`idManufacturer`, `name`, `details`) VALUES ('1', 'Toyota', 'One of the largest car manufacturers in the world.');
+INSERT INTO `mydb`.`manufacturer` (`idManufacturer`, `name`, `details`) VALUES ('2', 'Ford', 'An American multinational automaker.');
+INSERT INTO `mydb`.`manufacturer` (`idManufacturer`, `name`, `details`) VALUES ('3', 'BMW', 'A German luxury vehicle and motorcycle manufacturer.');
+INSERT INTO `mydb`.`manufacturer` (`idManufacturer`, `name`, `details`) VALUES ('4', 'Honda', 'Known for manufacturing motorcycles, automobiles, and power equipment.');
+INSERT INTO `mydb`.`manufacturer` (`idManufacturer`, `name`, `details`) VALUES ('5', 'Chevrolet', 'An American automobile division of General Motors.');
+
+
+model table
+
+INSERT INTO `mydb`.`model` (`idmodel`, `Manufacturer_idManufacturer`, `model_code`, `daily_hire_rate`, `name`) VALUES ('1', '1', 'CAMRY2022', '50', 'Toyota Camry');
+INSERT INTO `mydb`.`model` (`idmodel`, `Manufacturer_idManufacturer`, `model_code`, `daily_hire_rate`, `name`) VALUES ('2', '2', 'F150XLT2023', '75', 'Ford F-150 XLT');
+INSERT INTO `mydb`.`model` (`idmodel`, `Manufacturer_idManufacturer`, `model_code`, `daily_hire_rate`, `name`) VALUES ('3', '3', '3SERIES2022', '90', 'BMW 3 Series');
+INSERT INTO `mydb`.`model` (`idmodel`, `Manufacturer_idManufacturer`, `model_code`, `daily_hire_rate`, `name`) VALUES ('4', '4', 'CIVIC2023', '55', 'Honda Civic');
+INSERT INTO `mydb`.`model` (`idmodel`, `Manufacturer_idManufacturer`, `model_code`, `daily_hire_rate`, `name`) VALUES ('5', '5', 'MALIBU2022', '65', 'Chevrolet Malibu');
+
+car table
+
+INSERT INTO `mydb`.`car` (`idcar`, `model_idmodel`, `license_num`, `cur_mileage`, `engine_size`, `other_car_details`) VALUES ('1', '1', 'ABC123', '20000', '2.5', 'Blue color, sedan');
+INSERT INTO `mydb`.`car` (`idcar`, `model_idmodel`, `license_num`, `cur_mileage`, `engine_size`, `other_car_details`) VALUES ('2', '2', 'XYZ789', '15000', '3.0', 'Red color, pickup truck');
+INSERT INTO `mydb`.`car` (`idcar`, `model_idmodel`, `license_num`, `cur_mileage`, `engine_size`, `other_car_details`) VALUES ('3', '3', 'DEF456', '18000', '2.0', 'Black color, luxury sedan');
+INSERT INTO `mydb`.`car` (`idcar`, `model_idmodel`, `license_num`, `cur_mileage`, `engine_size`, `other_car_details`) VALUES ('4', '4', 'GHI789', '12000', '1.8', 'Silver color, compact car');
+INSERT INTO `mydb`.`car` (`idcar`, `model_idmodel`, `license_num`, `cur_mileage`, `engine_size`, `other_car_details`) VALUES ('5', '5', 'JKL012', '22000', '2.2', 'White color, midsize sedan');
+
+
+C/RUD:
+
+select * from car;
+select * from manufacturer;
+select * from model;
+
+
+UPDATE `mydb`.`car` SET `cur_mileage` = '35000' WHERE (`idcar` = '1') and (`model_idmodel` = '1');
+UPDATE `mydb`.`car` SET `cur_mileage` = '20000' WHERE (`idcar` = '2') and (`model_idmodel` = '2');
+UPDATE `mydb`.`car` SET `cur_mileage` = '19000' WHERE (`idcar` = '3') and (`model_idmodel` = '3');
+UPDATE `mydb`.`car` SET `cur_mileage` = '13000' WHERE (`idcar` = '4') and (`model_idmodel` = '4');
+
+
+DELETE FROM `mydb`.`car` WHERE (`idcar` = '5') and (`model_idmodel` = '5');
+
+3 complex queries:
+
+
+select m.name, m2.model_code, c.other_car_Details
+from manufacturer m
+inner join model m2 on m.idManufacturer = m2.Manufacturer_idManufacturer
+inner join car c on c.model_idmodel = m2.idmodel;
+
+
+select m.name, m2.name, c.license_num, m2.daily_hire_rate
+from manufacturer m
+inner join model m2 on m.idManufacturer = m2.Manufacturer_idManufacturer
+inner join car c on c.model_idmodel = m2.idmodel;
+    
+
+select m.name, m.details, c.license_num, m2.model_code, m2.name, c.engine_size
+from manufacturer m
+inner join model m2 on m.idManufacturer = m2.Manufacturer_idManufacturer
+inner join car c on c.model_idmodel = m2.idmodel;
+
+
+
+
+
+
